@@ -44,7 +44,7 @@ export const login = async (req, res) => {
             }
         } 
         else {
-            res.status(404).json({ success: false, message: "user not found" });
+            res.status(202).json({ success: false, message: "user not found" });
         }
     } 
     catch (error) {
@@ -56,7 +56,7 @@ export const logout = (req, res) => {
     const { token } = req.cookies;
 
     if (!token) {
-        res.status(400).json({ success: false, message: "already logged out" });
+        res.status(202).json({ success: false, message: "already logged out" });
     } 
     else setCookies(res, "", "logout successfully", 200, 0);
 };

@@ -6,7 +6,7 @@ export const authenticated= async (req,res,next)=>{
         const {token}=req.cookies;    
 
         if(!token){
-            res.status(401).json({success: false, message:" Login first"});
+            res.status(202).json({success: false, message:" Login first"});
         }
         else{
             const user= await User.findById(jwt.verify(token,process.env.secret_key));    
