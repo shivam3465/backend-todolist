@@ -8,7 +8,7 @@ export const register = async (req, res) => {
         let user = await User.findOne({ email });
 
         if (user)
-            res.status(405).json({ success: false, message: "previously register" });
+            res.status(400).json({ success: false, message: "previously register" });
         else {
             const hashedPassword = await bcrypt.hash(password, 10);
             user = await User.create({ name, email, password: hashedPassword });
@@ -44,7 +44,7 @@ export const login = async (req, res) => {
             }
         } 
         else {
-            res.json({ success: false, message: "user not found" });
+            res.status(404).json({ success: false, message: "user not found" });
         }
     } 
     catch (error) {
