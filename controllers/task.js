@@ -9,7 +9,7 @@ export const addTask = async (req, res) => {
     res.status(201).json({ success: true });
   } 
     catch (error) {
-    res.status(400).json({success: false, message: "not a valid id",});
+    res.status(400).json({success: false, message: "Not a valid id",});
   }
 };
 
@@ -34,13 +34,13 @@ export const updateTask = async (req, res) => {
       
         res.status(200).json({
           success: true,
-          message: "done ",
+          message: "Updated task status",
         });
     }
-    else res.status(400).json({success: false, message: "not found"});
+    else res.status(400).json({success: false, message: "Task not found"});
   } 
   catch (error) {    
-    res.status(400).json({success: false, message: "not a valid task id"});
+    res.status(400).json({success: false, message: "Not a valid task id"});
   }
 };
 
@@ -51,10 +51,10 @@ export const deleteTask = async (req, res) => {
     
     res.status(200).json({
       success: true,
-      message: "deleted task ",
+      message: "Task deleted successfully",
     }); 
   }
    catch (error) {
-    res.status(400).json({success: false, message: "not a valid task id"});
+    res.status(400).json({success: false, message: "Not a valid task id"});
   }
 };

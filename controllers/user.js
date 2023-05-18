@@ -8,12 +8,12 @@ export const register = async (req, res) => {
         let user = await User.findOne({ email });
 
         if (user)
-            res.status(200).json({ success: false, message: "previously register" });
+            res.status(400).json({ success: false, message: "Previously registered user" });
         else {
             const hashedPassword = await bcrypt.hash(password, 10);
             user = await User.create({ name, email, password: hashedPassword });
 
-            setCookies(res, user.id, "register successfully", 201, 1000 * 60 * 60);
+            setCookies(res, user.id, "Registered successfully", 201, 1000 * 60 * 60);
         }
     } 
     catch (error) {
@@ -35,16 +35,16 @@ export const login = async (req, res) => {
                 res,
                 user.id,
                 `Welcom back ${user.name}`,
-                202,
+                200,
                 1000 * 60 * 60
                 );
             }
             else {
-                res.json({ success: false, message: "wrong password" });
+                res.status(401).json({ success: false, message: "Wrong Password" });
             }
         } 
         else {
-            res.status(202).json({ success: false, message: "user not found" });
+            res.status(401).json({ success: false, message: "User Not Found" });
         }
     } 
     catch (error) {
@@ -56,9 +56,9 @@ export const logout = (req, res) => {
     const { token } = req.cookies;
 
     if (!token) {
-        res.status(202).json({ success: false, message: "already logged out" });
+        res.status(400).json({ success: false, message: "Already logged out" });
     } 
-    else setCookies(res, "", "logout successfully", 200, 0);
+    else setCookies(res, "", "Logout Successfully", 200, 0);
 };
 
 export const getMyProfile = (req, res) => {
