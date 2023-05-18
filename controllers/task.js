@@ -4,9 +4,9 @@ export const addTask = async (req, res) => {
   try {
     const { title, desc } = req.body;
     const { id } = req.user;
-    await Task.create({ title, desc, userId: id });
-
-    res.status(201).json({ success: true });
+    const task=await Task.create({ title, desc, userId: id });
+    
+    res.status(201).json({ success: true ,id:task.id});
   } 
     catch (error) {
     res.status(400).json({success: false, message: "Not a valid id",});

@@ -8,11 +8,11 @@ export const register = async (req, res) => {
         let user = await User.findOne({ email });
 
         if (user)
-            res.status(400).json({ success: false, message: "Previously registered user" });
+        res.status(400).json({ success: false, message: "Previously registered user" });
         else {
             const hashedPassword = await bcrypt.hash(password, 10);
             user = await User.create({ name, email, password: hashedPassword });
-
+                        
             setCookies(res, user.id, "Registered successfully", 201, 1000 * 60 * 60);
         }
     } 
